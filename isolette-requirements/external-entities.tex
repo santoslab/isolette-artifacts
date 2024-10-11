@@ -1,0 +1,191 @@
+\chapter{External Entities}
+\label{chap:external-entities}
+
+The following sections describe the external entities with which the Thermostat directly
+interacts: the Temperature Sensor, the Operator Interface, and the Heat Source. The monitored
+and controlled variables associated with each entity are listed, along with any environmental
+assumptions made about the entity. An Isolette external entity is also defined to specify
+environmental assumptions that span more than one external entity.
+
+\section{Isolette}
+\label{sec:isolette}
+
+An Isolette is an incubator for an Infant that provides controlled temperature, humidity, and
+oxygen (if necessary). It encompasses the Thermostat, the Temperature Sensor, the Operator
+Interface, and the Heat Source. The following environmental assumptions are made by the
+Thermostat about the Isolette
+
+\begin{itemize}
+\item EA-IS-1: When the Heat Source is turned on and the Isolette is properly shut, the
+      Current Temperature will increase at a rate of no more than 1°F per minute.
+
+      Rationale: If the Current Temperature can increase at a rate of more than 1°F per minute,
+      the Thermostat may not be able to turn the Heat Source off quickly enough to maintain
+      the Desired Temperature Range unless the allowed latency specified for the Heat Control
+      is reduced.
+\item EA-IS-2: When the Heat Source is turned off and the Isolette is properly shut, the
+      Current Temperature will decrease at a rate of no more than 1°F per minute.
+
+      Rationale: If the Current Temperature can decrease at a rate of more than 1°F per
+      minute, the Thermostat may not be able to turn the Heat Source on quickly enough to
+      maintain the Desired Temperature Range unless the allowed latency specified for the
+      Heat Control is reduced.
+\end{itemize}
+
+\section{Temperature Sensor}
+\label{sec:temperature-sensor}
+
+The Temperature Sensor provides the Current Temperature of the Air in the Isolette to the
+Thermostat. The monitored variables are shown in table ~\ref{tab:temp-sensor}.
+
+\begin{table}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Name & Type & Range & Units & Physical Interpretation \\\hline
+Current Temperature & Real & [68.0..105.0] & °F & Current air temperature inside Isolette \\\cline{2-4}
+     & Current & \textbullet Invalid, Valid &  &  \\\hline
+\end{tabular}
+\caption{Thermostat Monitored Variables for Temperature Sensor}
+\label{tab:temp-sensor}
+\end{table}
+
+\begin{itemize}
+\item Table ~\ref{tab:temp-sensor} denotes initial value
+\end{itemize}
+
+The following environmental assumptions are made:
+
+\begin{itemize}
+\item EA-TS-1: The Current Temperature will be provided to the Thermostat in degrees
+      Fahrenheit
+
+      Rationale: Consistency with environmental-assumption Operator Interface EA-OI-1
+\item EA-TS-2: The Current Temperature will be sensed to an accuracy of ±0.1°F.
+
+      Rationale: An accuracy of 0.1°F is necessary to ensure the Thermostat can turn the Heat
+      Source on and off quickly enough to maintain the Desired Temperature Range.
+\item EA-TS-3: The Current Temperature will cover the range of at least 68.0° to 105.0°F.
+
+      Rationale: This is the specified range of operation of the Isolette. The lower end of this
+      range is useful for monitoring an Isolette that is warming to the Desired Temperature
+      Range. The upper end is greater than the Upper Alarm Temperature to ensure that the
+      Current Temperature will be sensed across the entire Alarm Temperature Range.
+\end{itemize}
+
+\section{Heat Source}
+\label{sec:heat-source}
+
+The Heat Source heats the Air in the Isolette. It is turned on and off by changing the value of the
+Heat Control controlled variable. The controlled variables are shown in table ~\ref{tab:heat-source-variables}. No
+environmental assumptions are made.
+
+\begin{table}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Name & Type & Range & Units & Physical Interpretation \\\hline
+Heat Control & Enumerated & Off, On &  & Command to turn Heat Source on and off \\\hline
+\end{tabular}
+\caption{Thermostat Controlled Variables for Heat Source}
+\label{tab:heat-source-variables}
+\end{table}
+
+\section{Operator Interface}
+\label{sec:operator-interface}
+
+The Operator Interface provides the Operator Settings for the Thermostat and receives Operator
+Feedback from the Thermostat. The environmental assumptions associated with the Operator
+Interface are quite strong, which simplifies the manage Operator Interface Function. If these
+assumptions were not satisfied by the Operator Interface external entity, the Manage Operator
+Interface Function would need to be strengthened to ensure consistent inputs to the Thermostat.
+The monitored and controlled variables are shown in tables ~\ref{tab:operator-interface-variables} and ~\ref{tab:oi-controlled-variables}, respectively.
+
+\begin{table}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Name & Type & Range & Units & Physical Interpretation \\\hline
+Operator Settings &  &  &  & Thermostat settings provided by operator \\\hline
+\multicolumn{4}{|l|}{Desired Temperature Range} & Desired range of Isolette temperature \\\hline
+Lower Desired & Integer & [97..99] & °F & Lower value of Desired Temperature Range \\\cline{2-4}
+Temperature & Status & \textbullet Invalid, Valid &  & \\\hline
+Upper Desired & Integer & [98..100] & °F & Upper value of Desired Temperature Range \\\cline{2-4}
+Temperature & Status & \textbullet Invalid, Valid & & \\\hline
+\multicolumn{4}{|l|}{Alarm Temperature Range} & Active Alarm when outside of this range \\\hline
+Lower Alarm & Integer & [93..98] & °F & Lower value of Alarm Temperature Range \\\cline{2-4}
+Temperature & Status & \textbullet Invalid, Valid &  & \\\hline
+Upper Alarm & Integer & [98..100] & °F & Upper value of Alarm Temperature Range \\\cline{2-4}
+Temperature & Status & \textbullet Invalid, Valid & & \\\hline
+\end{tabular}
+\caption{Thermostat Monitored Variables for Operator Interface}
+\label{tab:operator-interface-variables}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Name & Type & Range & Units & Physical Interpretation \\\hline
+Operator Feedback &  &  &  & Information provided back to the operator \\\hline
+Regulator Status & Enumerated & Init, On, Failed &  & Status of the Thermostat Regulator Function \\\hline
+Monitor Status & Enumerated & Init, On, Failed &  & Status of the Thermostat Monitor Function \\\hline
+Display Temperature & Integer & [68..105] & °F & Displayed temperature of Isolette \\\hline
+Alarm & Enumerated & Off, On &  & Command to turn Alarm on or off \\\hline
+\end{tabular}
+\caption{Thermostat Controlled Variables for Operator Interface}
+\label{tab:oi-controlled-variables}
+\end{table}
+
+\begin{itemize}
+\item Table ~\ref{tab:operator-interface-variables} denotes initial value
+\end{itemize}
+
+The following environmental assumptions are made:
+
+\begin{itemize}
+\item EA-OI-1: All temperatures will be entered and displayed in degrees Fahrenheit.
+
+      Rationale: Minimize the complexity of this example. An actual system would probably
+      support Celsius or perhaps both Fahrenheit and Celsius
+\item EA4-OI-2: All temperatures will be set and displayed by the operators in increments of
+      1°F.
+
+      Rationale: Marketing studies have shown that customers prefer to set temperatures in
+      1 degree increments. A resolution 1°F is sufficient to be consistent with the functional
+      and performance requirements specified in the rest of the document.
+\item EA-OI-3: The Lower Alarm Temperature will always be $\geq$93°F.
+
+      Rationale: Exposure to temperatures less than 93°F will result in hypothermia, which can
+      lead to death within a few minutes for severely ill preterm infants.
+\item EA-OI-4: The Lower Alarm Temperature will always be less than or equal to the Lower
+      Desired Temperature of -1°F.
+
+      Rationale: If the Lower Alarm Temperature is greater than or equal to the Lower Desired
+      Temperature, the Alarm could be activated while the Current Temperature is still in the
+      Desired Temperature Range.
+\item EA-OI-5: The Lower Desired Temperature will always be $\geq$97°F.
+      Rationale: Exposing the Infant to temperatures lower than 97°F may result in excessive
+      heat loss and drop in heart rate secondary to metabolic acidosis.
+\item EA-OI-6: The Lower Desired Temperature will always be less than or equal to the Upper
+      Desired Temperature of -1°F.
+
+      Rationale: If the Lower Desired Temperature is greater than or equal to the Upper
+      Desired Temperature, it is unclear if the Heat Source should be on or off. This may result
+      in excessive cycling of the Heat Source.
+\item EA-OI-7: The Upper Desired Temperature will always be $\leq$100°F.
+      Rationale: Exposing the Infant to temperatures greater than 100°F may result in an
+      incorrect diagnosis of fever resulting in aggressive evaluation (blood culture and lumbar
+      puncture) and treatment for infection.
+\item EA-OI-8: The Upper Alarm Temperature will always be greater than or equal to the
+      Upper Desired Temperature of 1°F.
+
+      Rationale: If the Upper Alarm Temperature is less than or equal to the Upper Desired
+      Temperature, the Alarm could be activated while the Current Temperature is still in the
+      Desired Temperature Range.
+\item EA-OI-9: The Upper Alarm Temperature will always be $\leq$103°F.
+
+      Rationale: Exposure to temperatures greater than 103°F will result in hyperthermia,
+      which can lead to cardiac arrhythmias and febrile seizures within a few minutes.
+\item EA-OI-9: The Display Temperature will cover the range of at least 68.0° to 105.0°F.
+
+      Rationale: This is the specified range of operation of the Isolette. The lower end of this
+      range is useful for monitoring an Isolette that is warming to the Desired Temperature
+      Range. The upper end is set to be greater than the maximum Upper Alarm Temperature.
+\end{itemize}

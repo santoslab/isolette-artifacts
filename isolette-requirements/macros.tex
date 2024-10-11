@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\etc}{\emph{etc.}}
+
+\newcommand{\comment}[1]{{\sf ({#1})}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environments 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{normalenv}
+{
+  \renewcommand{\familydefault}{cmr}
+  \normalfont
+}
+{
+  \renewcommand{\familydefault}{cmss}
+  \sffamily
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grammar 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\gr@implitem#1<#2> #3 {%
+   \sbox\z@{\hskip\labelsep\grammarlabel{#2}{#3}}%
+   \strut\@@par%
+   \vskip-\parskip%
+   \vskip-\baselineskip%
+   \hrule\@height\z@\@depth\z@\relax%
+   \item[\unhbox\z@]%
+   \catcode`\<\active%
+}
+\makeatother
+
+\newcommand{\keyw}[1]{\texttt{'}\textbf{#1}\texttt{'}}
+\newcommand{\tkn}[1]{\texttt{#1}}
+
+% -----------------------------------------------------------------------------
+  %% doframeit draws a box around it argument by manipulating boxes.  It
+  %% is used in the frame environments.
+  %% 
+  %%  Rene' Seindal (seindal@diku.dk) Fri Feb 12 16:03:07 1988
+  %%  added \fboxrule and \fboxsep to \doframeit
+
+\def\doframeit#1{\vbox{%
+  \hrule height\fboxrule
+    \hbox{%
+      \vrule width\fboxrule \kern\fboxsep
+      \vbox{\kern\fboxsep #1\kern\fboxsep }%
+      \kern\fboxsep \vrule width\fboxrule }%
+    \hrule height\fboxrule }}
+
+  %% The frameit and Frameit environments formats text within a single 
+  %% Anything can be framed, including verbatim text.
+
+\def\frameit{\smallskip \advance \linewidth by -7.5pt \setbox0=\vbox \bgroup
+\strut \ignorespaces }
+
+\def\endframeit{\ifhmode \par \nointerlineskip \fi \egroup
+\doframeit{\box0}}
+% -----------------------------------------------------------------------------

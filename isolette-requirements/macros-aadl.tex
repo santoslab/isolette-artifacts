@@ -1,0 +1,460 @@
+% MathJax
+% \newcommand{\infer}[3][]{\frac{\displaystyle {#3}}{#2}{#1}}
+% \newcommand{\textsf}[1]{{\sf #1}}
+% \newcommand{\textbf}[1]{{\bf #1}}
+% \newcommand{\texttt}[1]{{\tt #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bx}[1]{\mbox{#1}}
+\newcommand{\sd}[1]{\textbf{#1}}
+\newcommand{\pf}[2]{{#1}\rightharpoonup{#2}}
+\renewcommand{\prod}[2]{{#1}\times{#2}}
+\newcommand{\funspace}[2]{{#1}\,\rightarrow\,{#2}}
+\newcommand{\mkset}[1]{\{ {#1} \}}
+\newcommand{\disjunion}[2]{{#1}\cupplus{#2}}
+\renewcommand{\brack}[1]{\textsf{\lbrack}{#1}\textsf{\rbrack}}
+\newcommand{\ite}[3]{{#1}\,\texttt{?}\,\,{#2}\,\,\texttt{:}\,\,{#3}}
+\newcommand{\pair}[2]{\langle {#1}, {#2} \rangle}
+\newcommand{\myin}[2]{{#1}\,\in\,{#2}}
+
+\newcommand{\domsym}{\mbox{\it dom}}
+\newcommand{\dom}[1]{\domsym({#1})}
+
+\newcommand{\truesym}{\mbox{\it true}}
+
+\newcommand{\settypesym}{\mbox{\it Set}}
+\newcommand{\settype}[1]{\settypesym[{#1}]}
+
+% stuff for op semantics rules
+
+% % Rules
+\newcommand{\hrulegap}{\hspace{5mm}}
+\newcommand{\vrulegap}{~\\
+\vspace{4mm}}
+
+% thm environments 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AADL Components 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\compv}{c}      %% meta-variable for a component
+\newcommand{\portv}{p}      %% meta-variable for a port variable
+\newcommand{\compsv}{C}     %% set of components (ids) 
+\newcommand{\portsv}{P}     %% port variables of a component
+\newcommand{\iportsv}{I}    %% infrastructure ports of a component
+\newcommand{\cvarsv}{V}     %% local state of a component
+
+\newcommand{\compids}{\mbox{\it CompIds}}
+\newcommand{\portids}{\mbox{\it PortIds}}
+
+\newcommand{\valuev}{v}
+
+%% port variables macros
+
+\newcommand{\ports}[1]{\portsv_{#1}}
+\newcommand{\inports}[1]{\portsv^{i}_{#1}}
+\newcommand{\outports}[1]{\portsv^{o}_{#1}}
+\newcommand{\portsc}{\ports{\compv}}
+\newcommand{\inportsc}{\inports{\compv}}
+\newcommand{\outportsc}{\outports{\compv}}
+\newcommand{\outportscinit}{\portsv^{o}_{\compv(\mbox{\tiny init})}}
+
+%% Model attributes
+
+\newcommand{\modsym}{{\cal M}} % model M
+\newcommand{\compsym}{{\cal C}} % set of all components in M
+\newcommand{\featsym}{\cal F} % set of all features of a component Comp \in C
+\newcommand{\propsym}{\mathit Prop} % set of all properties over a component Comp
+\newcommand{\portkindsym}{\mbox{\it PortKind}}
+\newcommand{\portdirectionsym}{\mbox{\it PortDirection}}
+\newcommand{\isdataportsym}{\mbox{\it isDataPort}}
+\newcommand{\iseventportsym}{\mbox{\it isEventPort}}
+\newcommand{\iseventlikeportsym}{\mbox{\it isEventLikePort}}
+\newcommand{\isinportsym}{\mbox{\it isInPort}}
+\newcommand{\isoutportsym}{\mbox{\it isOutPort}}
+\newcommand{\dataportssym}{\mbox{\it DataPorts}}
+\newcommand{\eventportssym}{\mbox{\it EventPorts}}
+\newcommand{\outdataportssym}{\mbox{\it OutDataPorts}}
+\newcommand{\outeventportssym}{\mbox{\it OutEventPorts}}
+\newcommand{\outeventlikeportssym}{\mbox{\it OutEventLikePorts}}
+\newcommand{\inportssym}{\mbox{\it InPorts}}
+\newcommand{\outportssym}{\mbox{\it OutPorts}}
+\newcommand{\dequeuepolicysym}{\mbox{\it DequeuePolicy}}
+\newcommand{\overflowhandlingprotocolsym}{\mbox{\it OverflowHandlingProtocol}}
+
+\newcommand{\conndestssym}{\mbox{\it ConnDests}}
+\newcommand{\messagev}{m}
+\newcommand{\messagesv}{M}
+
+\newcommand{\datasym}{\mbox{\sf data}}
+\newcommand{\eventsym}{\mbox{\sf event}}
+\newcommand{\eventdatasym}{\mbox{\sf eventdata}}
+\newcommand{\eventlikesym}{\mbox{\sf eventlike}}
+\newcommand{\insym}{\mbox{\sf in}}
+\newcommand{\outsym}{\mbox{\sf out}}
+\newcommand{\oneitemsym}{\mbox{\sf OneItem}}
+\newcommand{\allitemssym}{\mbox{\sf AllItems}}
+\newcommand{\systemsym}{\mbox{\sf system}}
+\newcommand{\processsym}{\mbox{\sf process}}
+\newcommand{\threadsym}{\mbox{\sf thread}}
+\newcommand{\dropoldestsym}{\mbox{\sf DropOldest}}
+\newcommand{\dropnewestsym}{\mbox{\sf DropNewest}}
+\newcommand{\errorsym}{\mbox{\sf Error}}
+
+
+\newcommand{\modelqueuemaxsize}[1]{\modsym.\maxqueuesizesym({#1})}
+\newcommand{\modelportkind}[1]{\modsym.\portkindsym({#1})}
+\newcommand{\modelportdirection}[1]{\modsym.\portdirectionsym({#1})}
+\newcommand{\modelisdataport}[1]{\modsym.\isdataportsym({#1})}
+\newcommand{\modelisdataportcomp}[2]{\modsym.\isdataportsym[#1]({#2})}
+\newcommand{\modeliseventport}[1]{\modsym.\iseventportsym({#1})}
+\newcommand{\modeliseventlikeport}[1]{\modsym.\iseventlikeportsym({#1})}
+\newcommand{\modeliseventlikeportcomp}[2]{\modsym.\iseventlikeportsym[#1]({#2})}
+\newcommand{\modelisinport}[1]{\modsym.\isinportsym({#1})}
+\newcommand{\modelisinportcomp}[2]{\modsym.\isinportsym[#1]({#2})}
+\newcommand{\modelisoutport}[1]{\modsym.\isoutportsym({#1})}
+\newcommand{\modelisoutportcomp}[2]{\modsym.\isoutportsym[#1]({#2})}
+\newcommand{\modeldequeuepolicy}[1]{\modsym.\dequeuepolicysym({#1})}
+\newcommand{\modeldequeuepolicycomp}[2]{\modsym.\dequeuepolicysym[#1]({#2})}
+\newcommand{\modeloverflowhandlingprotocol}[1]{\modsym.\overflowhandlingprotocolsym({#1})}
+\newcommand{\modeloverflowhandlingprotocolcomp}[2]{\modsym.\overflowhandlingprotocolsym[#1]({#2})}
+\newcommand{\modeldispatchprotocol}[1]{\modsym.\dispatchprotocolsym({#1})}
+
+\newcommand{\modeldataports}[1]{\modsym.\dataportssym({#1})}
+\newcommand{\modeleventports}[1]{\modsym.\eventportssym({#1})}
+\newcommand{\modeloutports}[1]{\modsym.\outportssym({#1})}
+
+\newcommand{\dispatchprotocolsym}{\mbox{\it DispatchProtocol}}
+\newcommand{\periodicsym}{\mbox{\sf Periodic}}
+\newcommand{\sporadicsym}{\mbox{\sf Sporadic}}
+
+\newcommand{\modelcompdataports}[1]{\modsym.\dataportssym({#1})}
+\newcommand{\modelcompeventports}[1]{\modsym.\eventportssym({#1})}
+
+\newcommand{\modelcompoutdataports}[1]{\modsym.\outdataportssym({#1})}
+\newcommand{\modelcompouteventports}[1]{\modsym.\outeventportssym({#1})}
+\newcommand{\modelcompouteventlikeports}[1]{\modsym.\outeventlikeportssym({#1})}
+\newcommand{\modelconndests}[1]{\modsym.\conndestssym({#1})}
+
+
+
+
+%% infrastructure ports macros
+
+\newcommand{\iports}[1]{\iportsv_{#1}}
+\newcommand{\iniports}[1]{\iportsv^{i}_{#1}}
+\newcommand{\outiports}[1]{\iportsv^{o}_{#1}}
+\newcommand{\iportsc}{\iports{\compv}}
+\newcommand{\iniportsc}{\iniports{\compv}}
+\newcommand{\outiportsc}{\outiports{\compv}}
+
+%% port state / map update
+
+\newcommand{\mapupdate}[3]{{#1}\brack{#2\,\mapsto\,{#3}}}
+\newcommand{\maplookup}[2]{{#1}({#2})}
+
+
+\newcommand{\queuesizesym}{\mbox{\it size}}
+\newcommand{\queueisemptysym}{\mbox{\it isEmpty}}
+\newcommand{\queuenotemptysym}{\mbox{\it notEmpty}}
+\newcommand{\queuemaxsizesym}{\mbox{\it maxsize}}
+\newcommand{\queueinsertdropoldsym}{\mbox{\it insert-drop-old}}
+\newcommand{\queueinsertdropnewsym}{\mbox{\it insert-drop-new}}
+\newcommand{\queuevalueafterreceivesym}{\mbox{\it value-after-receive}}
+\newcommand{\queuefullsym}{\mbox{\it full?}}
+
+\newcommand{\queuemake}[1]{\langle {#1} \rangle}
+\newcommand{\queuesnoc}[2]{\langle {{#1}\,\rhd\,{#2}} \rangle}    %% also used for dequeue
+\newcommand{\queueempty}{\queuemake{\cdot}}
+
+\newcommand{\queuesize}[1]{\queuesizesym({#1})}
+\newcommand{\queueinsertdropold}[1]{\queueinsertdropoldsym({#1})}
+\newcommand{\queueinsertdropnew}[1]{\queueinsertdropnewsym({#1})}
+\newcommand{\queuevalueafterreceive}[2]{\queuevalueafterreceivesym[#1]({#2})}
+\newcommand{\queuefull}[1]{\queuefullsym({#1})}
+\newcommand{\queueisempty}[1]{\queueisemptysym({#1})}
+\newcommand{\queuenotempty}[1]{\queuenotemptysym({#1})}
+
+%% local variables macros 
+
+\newcommand{\cvars}[1]{\cvarsv_{#1}}
+\newcommand{\cvarsc}{\cvars{\compv}}
+\newcommand{\cvarscinit}{\cvarsv_{\compv(\mbox{\tiny init})}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AADL Rule Infrastructure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\aadlrule}[1]{\textsf{#1}}
+
+\newcommand{\trule}[2]{\begin{array}[b]{c} {#1} \\ \hline {#2} \end{array}}
+\newcommand{\taxiom}[1]{\trule{}{#1}}
+\newcommand{\trulesp}{\;\;\;\;\;\;}
+\newcommand{\tjudge}[4]{{#1} \vdash_{#2} {#3} \Rightarrow {#4}}
+
+\newcommand{\quantdot}{\,.\,}
+
+
+                            
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thread Execution Semantics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% component container state
+
+\newcommand{\compstates}{\mbox{\it CompStates}}
+\newcommand{\compcont}[6]{\langle {#1}, {#2}, {#3}, {#4}, {#5}, {#6} \rangle}
+
+\newcommand{\portlist}{ps}
+\newcommand{\portlistmake}[1]{\langle {#1} \rangle}
+\newcommand{\portlistcons}[2]{\langle {{#1}\,::\,{#2}} \rangle}   
+\newcommand{\portlistempty}{\portlistmake{\cdot}}
+
+% Dispatch status
+
+\newcommand{\dsv}{D}
+% DispatchStatusTimeTriggered(frozenPorts: ISZ[Model.PortId]) extends DispatchStatusInfo
+% DispatchStatusEventTriggered(triggeringPorts: ISZ[Model.PortId], frozenPorts: ISZ[Model.PortId]) extends DispatchStatusInfo
+
+\newcommand{\dstimetriggeredsym}{\mbox{\sf TimeTriggered}}
+\newcommand{\dseventtriggeredsym}{\mbox{\sf EventTriggered}}
+% arg 1 = frozen ports
+\newcommand{\dstimetriggered}[1]{\dstimetriggeredsym({#1})}   
+% arg 1 = triggering ports
+% arg 2 = frozen ports
+\newcommand{\dseventtriggered}[2]{\dseventtriggeredsym({#1},{#2})}  
+
+% evaluate thread application code initialize entry point
+
+\newcommand{\evaltai}[5]{[{#2},\,{#3}]^{\mbox{\tiny write-only}}\,\Rightarrow^{\mbox{\tiny app-init}}_{#1}\,{#4},\,{#5}}
+\newcommand{\evaltaic}[4]{\evaltai{\compv}{#1}{#2}{#3}{#4}}
+
+% evaluate thread application code compute entry point
+
+\newcommand{\evaltac}[7]{{#2}\,\vdash\,{#3},\,{#4},\,[{#5}]^{\mbox{\tiny write-only}}\Rightarrow^{\mbox{\tiny app-compute}}_{#1}\,{#6},\,{#7}}
+\newcommand{\evaltacc}[6]{\evaltac{\compv}{#1}{#2}{#3}{#4}{#5}{#6}}
+
+% evaluate thread application input?
+
+%\newcommand{\evaltaii}[3]{{#2}\,\rightarrow_^{\mbox{\tiny inf-in}}{#1}\,{#3}}
+%\newcommand{\evaltaii}[5]{{#2},\,{#3}\,\rightarrow^{\mbox{\tiny inf-in}}_{#1}\,{#4},\,{#5}}
+%\newcommand{\evaltaiic}[4]{\evaltaii{\compv}{#1}{#2}{#3}{#4}}
+
+%\newcommand{\evaltaii}[3]{{#1}\,\rightarrow^{\mbox{\tiny rec-in}}[#2]\,{#3}}
+\newcommand{\evaltaii}[3]{{#1}\,\stackrel{\mbox{\tiny in}}{\longrightarrow}[#2]\,{#3}}
+\newcommand{\evalrecin}[3]{{#1}\,\stackrel{\mbox{\tiny RecIn}}{\longrightarrow}[#2]\,{#3}}
+
+
+% evaluate thread application output?
+
+\newcommand{\evaltaio}[3]{{#1}\, \stackrel{\mbox{\tiny release-out}}{\longrightarrow}[#2]\,{#3}}
+% \newcommand{\evaltaio}[5]{{#2},\,{#3}\,\rightarrow^{\mbox{\tiny inf-out}}_{#1}\,{#4},\,{#5}}
+% \newcommand{\evaltaioc}[4]{\evaltaio{\compv}{#1}{#2}{#3}{#4}}
+
+
+% \newcommand{\evalj}[3]{{#1}\,\vdash\,{#2}\,\Rightarrow\,{#3}}
+% \newcommand{\evall}[3]{{#1}\,\vdash\,{#2}\,\Rightarrow\,{#3}}
+% \newcommand{\tran}[3]{{#1}\,\vdash\,{#2}\,\rightarrow\,{#3}}
+% \newcommand{\ktrans}[5]{{#1}\,\vdash\,\pair{#2}{#3}\,\leadsto\,\pair{#4}{#5}}
+% \newcommand{\evalp}[6]{{#1},{#2}\vdash\,{#3}\,{#4}\,\Rightarrow\,\pair{#5}{#6}}
+
+\newcommand{\entrypointsyscompute}[3]{{#2}\, \stackrel{\mbox{\tiny exec-compute}}{\longrightarrow}\,{#3}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Queuing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newcommand{\queemp}{()}                % empty queue
+\newcommand{\que}[1]{({#1})}            % non-empty queue
+\newcommand{\quepolsym}{\mbox{Qpol}}    % queue policies
+\newcommand{\queupdsym}{\mbox{update}}
+\newcommand{\queupd}[3]{\queupdsym({#1},\,{#2},\,{#3})}
+
+% update operation
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  System States and Execution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\sysphasev}{\mbox{\em Phs}}
+\newcommand{\sysphaseinit}{\mbox{\sf Initializing}}
+\newcommand{\sysphasecompute}{\mbox{\sf Computing}}
+  
+\newcommand{\systhreadsv}{\mbox{\em Thrs}}
+\newcommand{\sysschedv}{\mbox{\em Schs}}
+\newcommand{\syscommv}{\mbox{\em Comms}}
+
+\newcommand{\sysstate}[4]{\langle {#1}, {#2}, {#3}, {#4} \rangle}
+
+\newcommand{\evalsys}[2]{{#1} \, \longrightarrow \, {#2}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pilar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\keyword}[1]{\textbf{{#1}}}
+\newcommand{\misctoken}[1]{\textbf{{#1}}}
+\newcommand{\Lit}[1]{\texttt{#1}}
+\newcommand{\VarRef}[1]{#1}
+\newcommand{\Bin}[3]{{#1}\,\texttt{#2}\,{#3}}
+\newcommand{\Assign}[2]{{#1}\,\,\misctoken{:=}\,\,{#2}\misctoken{;}}
+\newcommand{\Assert}[1]{\keyword{assert}\,\,{#1}\misctoken{;}}
+\newcommand{\Assume}[1]{\keyword{assume}\,\,{#1}\misctoken{;}}
+\newcommand{\Goto}[1]{\keyword{goto}\,{#1}\misctoken{;}}
+\newcommand{\If}[3]{\keyword{if}\,\,{#1}\,\,\keyword{then}\,\,\keyword{goto}\,\,{#2}\,\,\keyword{else}\,\,\keyword{goto}\,\,{#3}\misctoken{;}}
+\newcommand{\Return}[1]{\keyword{return}\,\,{#1}\misctoken{;}}
+\newcommand{\Block}[3]{\textbf{\#}{#1}\textbf{.}\,\,{#2}\,\,{#3}}
+\newcommand{\Procedure}[5]{\keyword{procedure}\,\,{#1}\,\,{#2}\,\misctoken{(}\,{#3}\,\misctoken{)}\,\misctoken{\{}\,{#4}\,{#5}\misctoken{\}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Konkrit/Kiasan
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % Semantic Domains
+\newcommand{\Seq}[1]{\sd{Seq}\brack{#1}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Variable}{\sd{Variable}}
+\newcommand{\Proc}{\sd{Proc}}
+\newcommand{\Label}{\sd{Label}}
+\newcommand{\Status}{\sd{Status}}
+\newcommand{\AOP}{\texttt{AOP}}
+\newcommand{\ROP}{\texttt{ROP}}
+
+% % Values
+\newcommand{\Normal}{\textsf{Normal}}
+\newcommand{\Error}{\textsf{Error}}
+\newcommand{\Infeasible}{\textsf{Infeasible}}
+\newcommand{\Ret}{\textsf{Ret}}
+
+% % Meta Variables
+\newcommand{\constv}{c}
+\newcommand{\constvv}{d}
+\newcommand{\constvvv}{e}
+\newcommand{\varv}{x}
+\newcommand{\varvv}{y}
+\newcommand{\varvvv}{z}
+\newcommand{\valv}{v}
+\newcommand{\valva}{v_1}
+\newcommand{\valvb}{v_2}
+\newcommand{\labelv}{{\it lbl}}
+\newcommand{\labeltv}{{\it lbl}_T}
+\newcommand{\labelfv}{{\it lbl}_F}
+\newcommand{\statusv}{{\it stat}}
+\newcommand{\statev}{s}
+
+\newcommand{\expv}{e}
+\newcommand{\pexpv}{\varepsilon}
+\newcommand{\opv}{\odot}
+\newcommand{\opav}{\odot_{\!A}}
+\newcommand{\oprv}{\odot_{\!R}}
+\newcommand{\actionv}{a}
+\newcommand{\jumpv}{j}
+\newcommand{\procv}{p}
+
+% % State Components
+\newcommand{\labelc}{{\it label}}
+\newcommand{\storec}{\sigma}
+\newcommand{\statusc}{{\it status}}
+\newcommand{\retvalc}{{\it retval}}
+
+% % State Functions
+\newcommand{\compState}[2]{{#1}_{{#2}}}
+\newcommand{\compStateUpdate}[3]{{#1}\brack{#2}}
+\newcommand{\labl}[1]{\compState{#1}{\labelc}}
+\newcommand{\labelUpdate}[2]{\compStateUpdate{#1}{#2}{\labelc}}
+\newcommand{\storeLookup}[2]{{#1}_{\storec}({#2})}
+\newcommand{\storeUpdate}[3]{\compStateUpdate{#1}{{#2}\mapsto{#3}}{\storec}}
+\newcommand{\ret}[2]{\compState{#1}{\retvalc}}
+\newcommand{\retUpdate}[2]{\compStateUpdate{#1}{#2}{\retvalc}}
+\newcommand{\status}[1]{\compState{#1}{\statusc}}
+\newcommand{\signal}[2]{\compStateUpdate{#1}{#2}{\statusc}}
+
+% % Environment
+\newcommand{\env}{\Gamma}
+\newcommand{\loc}[1]{\env({#1})}
+
+% % Rules
+\newcommand{\evala}[3]{{#1}\,\vdash\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\evalj}[3]{{#1}\,\vdash\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\evall}[3]{{#1}\,\vdash\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\tran}[3]{{#1}\,\vdash\,{#2}\,\rightarrow\,{#3}}
+\newcommand{\ktrans}[5]{{#1}\,\vdash\,\pair{#2}{#3}\,\leadsto\,\pair{#4}{#5}}
+\newcommand{\evalp}[6]{{#1},{#2}\vdash\,{#3}\,{#4}\,\Rightarrow\,\pair{#5}{#6}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Konkrit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\konkrit}[1]{{#1}\mathcal{C}}
+\newcommand{\konkritrule}[1]{\textsf{#1}\mathcal{C}}
+
+% % Semantic Domains
+\newcommand{\ValueC}{\konkrit{\sd{Value}}}
+\newcommand{\StoreC}{\konkrit{\sd{Store}}}
+\newcommand{\StateC}{\konkrit{\sd{State}}}
+
+% % Denotational Semantics
+\newcommand{\denote}[1]{\lbrack\!\lbrack{#1}\rbrack\!\rbrack}
+\newcommand{\opDenote}[3]{\denote{#1}({#2},\,{#3})}
+\newcommand{\opNot}[1]{\texttt{$\sim$}\,{#1}}
+
+% % State Functions
+\newcommand{\mkStateC}[4]{\langle {#1}, {#2}, {#3}, {#4} \rangle}
+\newcommand{\procInitC}[4]{{\it procInit}\,\,{#1}\,\,{#2}\,\,{#3}\,\,{#4}}
+
+% % Rules
+\newcommand{\evalpeC}[3]{{#1}\,\vdash_{\it pexp}\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\evaleC}[3]{{#1}\,\vdash_{\it exp}\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\evalebinC}[5]{{#1}\,\vdash_{\it exp}\,{#2}\,{\it #3}\,{#4}\,\Rightarrow\,{#5}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kiasan
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\kiasan}[1]{{#1}\mathcal{S}}
+\newcommand{\kiasanrule}[1]{\textsf{#1}\mathcal{S}}
+
+% % Semantic Domains
+\newcommand{\ValueS}{\kiasan{\sd{Value}}}
+\newcommand{\Symbol}{\sd{Symbol}}
+\newcommand{\StoreS}{\kiasan{\sd{Store}}}
+\newcommand{\SymIntro}{\sd{SymIntro}}
+\newcommand{\Rel}{\sd{Rel}}
+\newcommand{\Constraint}{\sd{Constraint}}
+\newcommand{\PathCondition}{\sd{PathCondition}}
+\newcommand{\StateS}{\kiasan{\sd{State}}}
+
+% % Meta Variables
+\newcommand{\symv}{\alpha}
+\newcommand{\constraintv}{\phi}
+
+% % State Components
+\newcommand{\pcc}{\Phi}
+
+% % State Functions
+\newcommand{\mkStateS}[5]{\langle {#1}, {#2}, {#3}, {#4}, {#5} \rangle}
+\newcommand{\pc}[1]{\compState{#1}{\pcc}}
+\newcommand{\introSym}[5]{{#1}\brack{{#2}\,{\tt ==}\,\,{#3}\,\,{#4}\,\,{#5}}}
+\newcommand{\addRelTS}[4]{{#1}\brack{ {#2}\,\,{#3}\,\,{#4}}}
+\newcommand{\addRelFS}[4]{{#1}\brack{ {#2}\,\,{\opNot{\!#3}}\,\,{#4}}}
+
+% % Rules
+\newcommand{\evaleS}[4]{{#1}\,\vdash_{\it exp}\,{#2}\,\Rightarrow\,\pair{#3}{#4}}
+\newcommand{\evalpeS}[3]{{#1}\,\vdash_{\it pexp}\,{#2}\,\Rightarrow\,{#3}}
+\newcommand{\evalebinS}[6]{{#1}\,\vdash_{\it exp}\,{#2}\,{\it #3}\,{#4}\,\Rightarrow\,\pair{#5}{#6}}

@@ -1,0 +1,299 @@
+\chapter{Operational Concepts}
+\label{chap:operational-concepts}
+
+The following use and exception cases describe how the operators
+interact with the Isolette and the Thermostat. A summary of the use
+and exception cases is provided in Table~\ref{tab:use-exception-cases}.
+The actors and their primary goals are shown in Table~\ref{tab:actors-goals}.
+
+\begin{table}
+\begin{tabular}{|l|l|l|}
+\hline   
+{\bf ID} & \begin{minipage}[t]{2cm} {\bf Primary \\ Actor} \end{minipage} & {\bf Title and Description}
+\\[1em]
+\hline
+~\ref{sec:uc-normal-operational} & Nurse & \emph{Normal Operation of Isolette:} \\
+      &        & \hspace{3mm} 
+                  \begin{minipage}[t]{11cm}
+                    Describes the normal operation of the Isolette by the Nurse
+                  \end{minipage}  
+\\[1em]      
+\hline
+~\ref{sec:uc-configure} & Nurse & \emph{Configure the Isolette:} \\
+      &        & \hspace{3mm} 
+                  \begin{minipage}[t]{11cm}
+                     Describes how the Nurse configures the Isolette and Thermostat for the Infant
+                   \end{minipage}
+\\[1em]
+\hline
+~\ref{sec:uc-maintain-temperature} & Thermostat & \emph{Maintain Desired Temperature:} \\
+      &        & \hspace{3mm} 
+                  \begin{minipage}[t]{11cm}
+                     Describes how the Thermostat turns the Heat Source on and off to 
+                     maintain the Current Temperature in the Isolette within the 
+                     Desired Temperature Range
+                   \end{minipage}
+\\[1em]
+\hline
+~\ref{sec:ec-failure-maintain-safe-temperature} & Thermostat & \emph{Failure to Maintain Safe Temperature:} \\
+      &            & \hspace{3mm} 
+                     \begin{minipage}[t]{11cm}
+                       Describes how the Thermostat and the Nurse respond when the 
+                       Isolette is unable to maintain the Current Temperature 
+                       within the Alarm Temperature Range
+                     \end{minipage}
+\\[1em]
+\hline
+~\ref{sec:ec-respond-failure} & Thermostat & \emph{Respond to Thermostat Failure:} \\
+      &            & \hspace{3mm} 
+                     \begin{minipage}[t]{11cm}
+                        Describes how the Thermostat and the 
+                        Nurse respond when the Thermostat detects an 
+                        internal failure
+                     \end{minipage}                                                         
+\\[1em]
+\hline
+~\ref{sec:ec-failure-maintain-temperature} & Nurse & \emph{Failure to Maintain Desired Temperature:} \\
+      &            & \hspace{3mm} 
+                     \begin{minipage}[t]{11cm}
+                        Describes how the Nurse deals with an Isolette that 
+                        cannot keep the Current Temperature within the Desired 
+                        Temperature Range but can keep the Current Temperature 
+                        within the Alarm Temperature Range
+                     \end{minipage}
+\\
+\hline                   
+\end{tabular}   
+\caption{Summary of Isolette Thermostat Use and Exception Cases}
+\label{tab:use-exception-cases}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|l|l|}
+\hline
+{\bf Actor} & {\bf Primary Goals of the Actor} \\\hline
+Nurse & \begin{minipage}[t]{11cm}
+        Provide the Infant with proper nursing care, including keeping the Infant warm
+        \end{minipage}
+\\\hline
+Infant & \begin{minipage}[t]{11cm}
+         Be comfortable and healthy
+         \end{minipage}
+\\\hline
+Isolette & \begin{minipage}[t]{11cm}
+           Hold the Infant and maintain the Current Temperature within the Desired Temperature Range
+           \end{minipage}
+\\\hline
+Thermostat & \begin{minipage}[t]{11cm}
+             Maintain Current Temperature in the Isolette within the Desired Temperature Range
+             \end{minipage}
+\\\hline
+\end{tabular}
+\caption{Isolette Thermostat Primary Actors and Goals}
+\label{tab:actors-goals}
+\end{table}
+
+\section{Use Case:  Normal Operation of Isolette}
+\label{sec:uc-normal-operational}
+
+This use case describes the normal operation of the Isolette by the Nurse.
+
+\begin{itemize}
+\item Related System Goals: G1 and G2
+\item Primary Actor: Nurse
+\item Precondition:
+  \begin{itemize}
+  \item Infant is ready to be placed in the Isolette
+  \item Isolette and Thermostat are turned off
+   \end{itemize}
+\item Postcondition:
+  \begin{itemize}   
+  \item Infant is removed from the Isolette
+  \item Isolette and Thermostat are turned off
+  \end{itemize}
+\item Main Success Scenario
+  \begin{enumerate}
+  \item Nurse turns on the Isolette
+  \item Isolette turns on the Thermostat
+  \item  Thermostat initializes and enters its normal mode of
+    operation (exception case 1)
+     (UC \ref{sec:ec-respond-failure}, Section~\ref{subsec:MRM-fun}, and Section~\ref{subsec:MMMF})
+  \item Nurse configures the Isolette for the needs of the Infant (~\ref{sec:uc-configure})
+  \item Nurse waits until the Current Temperature is within the Desired Temperature
+            Range (~\ref{sec:ec-failure-maintain-temperature} and ~\ref{subsec:MRI-fun})
+  \item Nurse places the Infant in the Isolette
+  \item Isolette maintains Desired Temperature (~\ref{sec:uc-maintain-temperature})
+  \item Nurse confirms that the Current Temperature is in the Desired Temperature Range during rounds (~\ref{sec:ec-failure-maintain-temperature} and ~\ref{subsec:MRI-fun})
+  \item Nurse removes Infant
+  \item Nurse turns off the Isolette
+  \item Isolette turns off the Thermostat
+  \end{enumerate}
+\item Exception Case 1:
+  \begin{enumerate}
+  \item Alarm is activated because Current Temperature is outside the Alarm
+Temperature Range (~\ref{subsec:manage-alarm-function})
+  \item Nurse ignores the Alarm\footnote{In the interest of simplicity, the functionality to turn the Alarm off is not specified. As an exercise, the reader might want to consider what changes would be necessary to add this capability to the example.}
+  \item Continue with Main Success Scenario, step 4.
+  \end{enumerate}
+\end{itemize}  
+
+\section{Use Case:  Configure The Isolette}
+\label{sec:uc-configure}
+
+This use case describes how the Nurse configures the Isolette and Thermostat for the Infant.
+
+\begin{itemize}
+\item Related System Goals: G1 and G2
+\item Primary Actor: Nurse
+\item Precondition: The Isolette and Thermostat are turned on
+\item Postcondition:
+  \begin{itemize}
+   \item The Desired Temperature Range is set for the needs of the Infant
+   \item The Alarm Temperature Range is set for the needs of the Infant
+   \item The Current Temperature in the Isolette is in the Desired Temperature Range
+   \end{itemize}
+\item Main Success Scenario:
+   \begin{enumerate}
+   \item Nurse sets the Alarm Temperature Range for the Infant (~\ref{subsec:MMIF})
+   \item Nurse sets the Desired Temperature Range for the Infant (~\ref{subsec:MRI-fun})
+   \item Thermostat maintains Desired Temperature Range (~\ref{sec:uc-maintain-temperature})
+   \end{enumerate}
+ \end{itemize}  
+
+\section{Use Case: Maintain Desired Temperature}
+\label{sec:uc-maintain-temperature}
+
+This use case describes how the Thermostat turns the Heat Source on and off to maintain the
+Current Temperature in the Isolette within the Desired Temperature Range.
+
+\begin{itemize}
+\item Related System Goals: G1
+\item Primary Actor: Thermostat
+\item Precondition: Isolette and Thermostat are turned on
+\item Postcondition:
+  \begin{itemize}
+  \item Isolette and Thermostat are turned on
+  \item Current Temperature is in the Desired Temperature Range
+  \end{itemize}
+\item Main Success Scenario:
+  \begin{enumerate}
+  \item Current Temperature falls below the Desired Temperature Range
+  \item Thermostat turns the Heat Source on to warm up the Isolette (~\ref{subsec:manage-heat-source})
+  \item Current Temperature rises above the Desired Temperature Range
+  \item Thermostat turns the Heat Source off to cool the Isolette (~\ref{subsec:manage-heat-source})
+  \item Repeat steps 1 through 4
+  \end{enumerate}
+\end{itemize}
+
+\section{Exception Case: Failure To Maintain Safe Temperature}
+\label{sec:ec-failure-maintain-safe-temperature}
+
+This exception case describes how the Thermostat and Nurse respond when the Isolette is unable
+to maintain Current Temperature within the Alarm Temperature Range.
+
+\begin{itemize}
+\item Related System Goals: G2
+\item Primary Actor: Thermostat
+\item Precondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Current Temperature is within the Alarm Temperature Range
+  \item The Alarm is off
+  \end{itemize}
+\item Postcondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Current Temperature is within the Desired Temperature Range
+  \item The Alarm is off
+  \end{itemize}
+\item Main Success Scenario:
+  \begin{enumerate}
+  \item Current Temperature falls below or rises above the Alarm Temperature Range
+  \item Thermostat activates the Alarm (~\ref{subsec:manage-alarm-function})
+  \item Nurse responds to the Alarm and sees that the Display Temperature is in the
+        Alarm Temperature Range (~\ref{subsec:MRI-fun})
+  \item Nurse removes Infant from the Isolette
+  \item Nurse corrects the problem, e.g., closing an open door (alternate course 1)
+  \item Nurse waits until the Display Temperature is within the Desired Temperature
+        Range (~\ref{sec:ec-failure-maintain-temperature} and ~\ref{subsec:MRI-fun})
+  \item Nurse places Infant back in the Isolette
+  \end{enumerate}
+\item Alternate Course 1:
+  \begin{enumerate}
+  \item Nurse is unable to correct the problem
+  \item Nurse obtains another Isolette
+  \item Nurse starts normal operation of the new Isolette (~\ref{sec:uc-normal-operational})
+  \end{enumerate}
+\end{itemize}
+
+\section{Exception Case: Respond To Thermostat Failure}
+\label{sec:ec-respond-failure}
+
+This exception case describes how the Thermostat and the Nurse respond when the Thermostat
+detects an internal failure.
+
+\begin{itemize}
+\item Related System Goals: G2
+\item Primary Actor: Thermostat
+\item Precondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Thermostat status is on
+  \item The Alarm is off
+  \end{itemize}
+\item Postcondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Current Temperature is in the Desired Temperature Range
+  \item The Alarm is off
+  \end{itemize}
+\item Main Success Scenario:
+  \begin{enumerate}
+  \item Thermostat detects an internal failure (~\ref{subsec:detect-regulator-failure} and ~\ref{subsec:DMFF})
+  \item Thermostat enters the FAILED mode (~\ref{subsec:MRM-fun} and ~\ref{subsec:MMMF})
+  \item Thermostat sets its Displayed Status to failed (~\ref{subsec:MRI-fun} and ~\ref{subsec:MMIF})
+  \item Thermostat activates the Alarm
+  \item Nurse responds to the Alarm and sees that the Thermostat is failed
+  \item Nurse removes Infant from the Isolette
+  \item Nurse obtains another Isolette
+  \item Nurse starts normal operation of the new Isolette (~\ref{sec:uc-normal-operational})
+  \end{enumerate}
+\end{itemize}
+
+\section{Exception Case: Failure To Maintain Desired Temperature}
+\label{sec:ec-failure-maintain-temperature}
+
+This exception case describes how the Nurse handles an Isolette that cannot keep the Current
+Temperature within the Desired Temperature Range, but can keep the Current Temperature
+within the Alarm Temperature Range.
+
+\begin{itemize}
+\item Related System Goals: G1
+\item Primary Actor: Nurse
+\item Precondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Current Temperature is not within the Desired Temperature Range
+  \item The Current Temperature is within the Alarm Temperature Range
+  \end{itemize}
+\item Postcondition:
+  \begin{itemize}
+  \item The Isolette and Thermostat are turned on
+  \item The Current Temperature is in the Desired Temperature Range
+  \end{itemize}
+\item Main Success Scenario:
+  \begin{enumerate}
+  \item Nurse attempts to correct the problem, e.g., closing an open door
+  \item Nurse waits until the Current Temperature of the Isolette is within the Desired
+        Temperature Range (alternate course 1) (~\ref{subsec:MRI-fun})
+  \item Return to calling scenario
+  \end{enumerate}
+\item Alternate Course 1:
+  \begin{enumerate}
+  \item Display Temperature fails to enter the Desired Temperature Range (~\ref{subsec:MRI-fun})
+  \item Nurse removes Infant from the Isolette
+  \item Nurse obtains another Isolette
+  \item Nurse starts normal operation of the new Isolette (~\ref{sec:uc-normal-operational})
+  \item Return to calling scenario
+  \end{enumerate}
+\end{itemize}

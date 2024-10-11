@@ -16,3 +16,9 @@
 **/slang/js/
 **/.metals/
 **/.vscode/
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg

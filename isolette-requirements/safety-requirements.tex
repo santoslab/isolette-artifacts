@@ -1,0 +1,44 @@
+\chapter{Safety Requirements}
+\label{chap:safety-requirements}
+
+The following relevant hazards were identified through the safety assessment process:
+
+\begin{itemize}
+\item H1:
+      Prolonged exposure of Infant to unsafe heat or cold
+      Classification: catastrophic
+      Probability: $<10^{-9}$ per hour of operation
+\end{itemize}
+
+To ensure that probability of hazard H1 is $10^{-9}$ per hour of operation, the following derived
+safety requirements are levied on the Isolette Thermostat:
+
+\begin{itemize}
+\item SR-1: The Isolette shall include an independent regulator function that maintains the
+      Current Temperature inside the Isolette within the Desired Temperature Range.
+
+      Rationale: The Desired Temperature Range will be set by the Nurse to the ideal range
+      based on the Infant’s weight and health. The regulator should maintain the Current
+      Temperature within this range under normal operation.
+
+      Allowed probability of failure: $<10^{-5}$ per hour
+\item SR-2: The Isolette shall include an independent monitor function that activates an Alarm
+      within a maximum of 5 seconds whenever
+  \begin{itemize}
+  \item the Current Temperature falls below or rises above the Alarm Temperature Range.
+  \item the Current Temperature or the Alarm Temperature Range is flagged as invalid.
+  \item an internal failure has been detected in the monitor function.
+  \end{itemize}
+  Rationale: The Alarm Temperature Range will be set by the Nurse based on the Infant’s
+  weight and health. The Infant should be removed from the Isolette within 15 seconds
+  after the Current Temperature falls below or rises above this range. With the normal
+  monitoring provided by the Nurse, this can be accomplished within 10 seconds, leaving 5
+  seconds for the system to activate the Alarm. Activating the Alarm in less time is
+  desirable.
+
+  If the Current Temperature or the Alarm Temperature Range provided to the monitor
+  function are flagged as invalid or if an internal failure is detected in the monitor function,
+  the monitor function should not be trusted to perform correctly.
+
+  Allowed probability of failure: $<10^{-5}$ per hour.
+\end{itemize}
