@@ -30,7 +30,10 @@ object InitialValues {
   val UPPER_DESIRED_TEMPERATURE_LOWER_RANGE: F32 = 98f
   val UPPER_DESIRED_TEMPERATURE_UPPER_RANGE: F32 = 100f
 
-  val DEFAULT_REGULATOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+  // Logika currently doesn't treat immutable val assignments as constants. Workaround is to use a strictpure method
+  //val DEFAULT_REGULATOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+  @strictpure def DEFAULT_REGULATOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+
   val DEFAULT_REGULATOR_INTERNAL_FAILURE_FLAG: B = false
   val DEFAULT_REGULATOR_INTERFACE_FAILURE_FLAG: B = false
 
@@ -73,7 +76,10 @@ object InitialValues {
   val UPPER_ALARM_TEMPERATURE_UPPER_RANGE: F32 = 102f //used by operator interface
 
 
-  val DEFAULT_MONITOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+  // Logika currently doesn't treat immutable val assignments as constants. Workaround is to use a strictpure method
+  //val DEFAULT_MONITOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+  @strictpure def DEFAULT_MONITOR_STATUS: Isolette_Data_Model.Status.Type = Isolette_Data_Model.Status.Init_Status
+
   val DEFAULT_MONITOR_INTERNAL_FAILURE_FLAG: B = false
   val DEFAULT_MONITOR_INTERFACE_FAILURE_FLAG: B = false
 }

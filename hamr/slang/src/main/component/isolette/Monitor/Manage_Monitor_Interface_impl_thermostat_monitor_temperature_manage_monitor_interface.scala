@@ -39,6 +39,7 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
         InitialValues.DEFAULT_UPPER_ALARM_TEMPERATURE))
     // set initial regulator status
     api.put_monitor_status(InitialValues.DEFAULT_MONITOR_STATUS)
+
     // set initial regulator failure
     api.put_interface_failure(
       Failure_Flag_impl(
